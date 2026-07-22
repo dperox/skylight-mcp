@@ -1,0 +1,1 @@
+{"version":3,"file":"photos.js","sourceRoot":"","sources":["../../../src/api/endpoints/photos.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,cAAc,CAAC;AAezC;;GAEG;AACH,MAAM,CAAC,KAAK,UAAU,SAAS;IAC7B,MAAM,MAAM,GAAG,SAAS,EAAE,CAAC;IAC3B,MAAM,QAAQ,GAAG,MAAM,MAAM,CAAC,GAAG,CAAiB,8BAA8B,CAAC,CAAC;IAClF,OAAO,QAAQ,CAAC,IAAI,CAAC;AACvB,CAAC"}

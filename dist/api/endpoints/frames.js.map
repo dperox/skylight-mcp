@@ -1,0 +1,1 @@
+{"version":3,"file":"frames.js","sourceRoot":"","sources":["../../../src/api/endpoints/frames.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,cAAc,CAAC;AAGzC;;GAEG;AACH,MAAM,CAAC,KAAK,UAAU,QAAQ;IAC5B,MAAM,MAAM,GAAG,SAAS,EAAE,CAAC;IAC3B,MAAM,QAAQ,GAAG,MAAM,MAAM,CAAC,GAAG,CAAgB,uBAAuB,CAAC,CAAC;IAC1E,OAAO,QAAQ,CAAC,IAAI,CAAC;AACvB,CAAC"}

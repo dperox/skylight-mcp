@@ -1,0 +1,1 @@
+{"version":3,"file":"devices.js","sourceRoot":"","sources":["../../../src/api/endpoints/devices.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,cAAc,CAAC;AAGzC;;GAEG;AACH,MAAM,CAAC,KAAK,UAAU,UAAU;IAC9B,MAAM,MAAM,GAAG,SAAS,EAAE,CAAC;IAC3B,MAAM,QAAQ,GAAG,MAAM,MAAM,CAAC,GAAG,CAAkB,+BAA+B,CAAC,CAAC;IACpF,OAAO,QAAQ,CAAC,IAAI,CAAC;AACvB,CAAC"}

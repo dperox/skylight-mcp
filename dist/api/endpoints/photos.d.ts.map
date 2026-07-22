@@ -1,0 +1,1 @@
+{"version":3,"file":"photos.d.ts","sourceRoot":"","sources":["../../../src/api/endpoints/photos.ts"],"names":[],"mappings":"AAEA,MAAM,WAAW,aAAa;IAC5B,IAAI,EAAE,OAAO,CAAC;IACd,EAAE,EAAE,MAAM,CAAC;IACX,UAAU,EAAE;QACV,IAAI,CAAC,EAAE,MAAM,CAAC;QACd,CAAC,GAAG,EAAE,MAAM,GAAG,OAAO,CAAC;KACxB,CAAC;CACH;AAMD;;GAEG;AACH,wBAAsB,SAAS,IAAI,OAAO,CAAC,aAAa,EAAE,CAAC,CAI1D"}
