@@ -185,14 +185,8 @@ export type TaskBoxItemResponse = JsonApiResponse<TaskBoxItemResource>;
 export type RewardsResponse = JsonApiResponse<RewardResource[]>;
 
 // Request body types for creating resources
-export interface CreateChoreRequest {
-  data: {
-    type: "chore";
-    attributes: Partial<ChoreAttributes>;
-    relationships?: ChoreRelationships;
-  };
-}
-
+// Note: chore create/update use FLAT request bodies (see api/endpoints/chores.ts),
+// not JSON:API wrappers — the API accepts a wrapped body with a 200 but ignores it.
 export interface CreateTaskBoxItemRequest {
   data: {
     type: "task_box_item";
@@ -270,15 +264,6 @@ export interface UpdateCalendarEventRequest {
 }
 
 export type CalendarEventResponse = JsonApiResponse<CalendarEventResource>;
-
-// Chore update request type
-export interface UpdateChoreRequest {
-  data: {
-    type: "chore";
-    attributes: Partial<ChoreAttributes>;
-    relationships?: ChoreRelationships;
-  };
-}
 
 // Reward request types
 export interface CreateRewardRequest {

@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **`create_chore` silently created chores that never appeared.** `findCategoryByName` used a loose substring match with `Array.find`, so an assignee like "Sam" could resolve to an unrelated calendar/source category (e.g. "Samantha Jones") that merely contained the text. The API accepts a chore created against such a category with a 200 but never shows it on the chore chart. `findCategoryByName` now prefers an exact (case-insensitive) label match, and only falls back to a partial match — preferring real family members (profile / chore-chart categories) over other categories. This also fixes assignee resolution in the reward tools, which share `findCategoryByName`.
+- **`update_chore` reported success but changed nothing.** `updateChore` sent a JSON:API-wrapped body (`{ data: { type, attributes } }`), but the Skylight PUT endpoint expects a flat body. The server returned 200 and applied nothing. The body is now flat, matching `createChore`.
+- **Marking a chore complete failed.** The API stores completed chores as `status: "complete"`, not `"completed"`, and it rejects a PUT that changes the completion status alongside other attributes (HTTP 400). `update_chore` now maps the `"completed"` enum to `"complete"`, and `updateChore` splits status changes into their own request. `get_chores` with `status: "completed"` now matches the API's `"complete"` value instead of returning nothing.
+- **`delete_chore` reported a false error on success.** DELETE returns `200` with an empty body; the client called `response.json()` unconditionally and threw `"Unexpected end of JSON input"`. The client now handles empty/`204` bodies.
+
+### Removed
+
+- **Unused `CreateChoreRequest` / `UpdateChoreRequest` types.** Both encoded the JSON:API-wrapped request shape that the chores API silently ignores — keeping them around invited reintroducing the `update_chore` no-op bug.
+
 ## [2.0.1] - 2026-04-19
 
 Docs + metadata only. No runtime code changes.

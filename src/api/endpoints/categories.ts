@@ -26,17 +26,32 @@ export function clearCategoriesCache(): void {
 }
 
 /**
- * Find a category by name (case-insensitive partial match)
+ * Find a category by name (case-insensitive).
  * Categories represent family members like "Dad", "Mom", "Kids", etc.
+ *
+ * An exact label match always wins. Only if there is no exact match do we
+ * fall back to a partial match, and even then we prefer a real family member
+ * (a profile or chore-chart category) over an unrelated calendar/source
+ * category that merely contains the text. This prevents "Sam" from resolving
+ * to a "Samantha Jones" calendar category: the API accepts a chore created
+ * against such a category with a 200 but never shows it on the chore chart.
  */
 export async function findCategoryByName(name: string): Promise<CategoryResource | undefined> {
   const categories = await getCategories();
   const lowerName = name.toLowerCase();
 
-  return categories.find((cat) => {
-    const label = cat.attributes.label?.toLowerCase();
-    return label && (label === lowerName || label.includes(lowerName));
-  });
+  // 1. Exact (case-insensitive) label match.
+  const exact = categories.find((cat) => cat.attributes.label?.toLowerCase() === lowerName);
+  if (exact) {
+    return exact;
+  }
+
+  // 2. Partial match, preferring real family members over other categories.
+  const partial = categories.filter((cat) => cat.attributes.label?.toLowerCase().includes(lowerName));
+  const preferred = partial.find(
+    (cat) => cat.attributes.linked_to_profile || cat.attributes.selected_for_chore_chart
+  );
+  return preferred ?? partial[0];
 }
 
 /**

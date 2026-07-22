@@ -200,12 +200,14 @@ export class SkylightClient {
       await this.handleResponseError(response, url);
     }
 
-    // Handle 304 Not Modified
-    if (response.status === 304) {
+    // Handle 304 Not Modified and empty bodies (e.g. DELETE returns 200 with
+    // no body, which would otherwise throw on response.json()).
+    if (response.status === 304 || response.status === 204) {
       return {} as T;
     }
 
-    return response.json() as Promise<T>;
+    const text = await response.text();
+    return (text ? JSON.parse(text) : {}) as T;
   }
 
   /**

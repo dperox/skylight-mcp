@@ -58,9 +58,11 @@ Returns chores with their assignees, due dates, and completion status.`,
 
         let chores = result.chores;
 
-        // Filter by status
+        // Filter by status. The Skylight API stores completed chores with
+        // status "complete" (not "completed"), so map the tool's enum value.
         if (status !== "all") {
-          chores = chores.filter((chore) => chore.attributes.status === status);
+          const apiStatus = status === "completed" ? "complete" : status;
+          chores = chores.filter((chore) => chore.attributes.status === apiStatus);
         }
 
         // Build category lookup for assignee names
@@ -379,7 +381,8 @@ Returns: The updated chore details.`,
         // Single instance update (existing behavior)
         const updates: Parameters<typeof updateChore>[1] = {};
         if (summary !== undefined) updates.summary = summary;
-        if (status !== undefined) updates.status = status;
+        // The Skylight API expects "complete" (not "completed").
+        if (status !== undefined) updates.status = status === "completed" ? "complete" : status;
         if (date !== undefined) updates.start = parseDate(date, config.timezone);
         if (time !== undefined) updates.startTime = time ? parseTime(time) : null;
         if (rewardPoints !== undefined) updates.rewardPoints = rewardPoints;
